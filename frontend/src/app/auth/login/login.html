@@ -1,0 +1,20 @@
+<div class="login-wrap">
+  <form class="login-card" (ngSubmit)="submit()">
+    <div class="brand big">Health<span>Link</span></div>
+    <p class="muted center">Community health records and vaccination tracking</p>
+
+    @if (notice()) { <div class="alert info">{{ notice() }}</div> }
+    @if (error()) { <div class="alert error">{{ error() }}</div> }
+
+    <label>Username or reference number
+      <input name="username" [(ngModel)]="username" autocomplete="username" autofocus />
+    </label>
+    <label>Password
+      <input name="password" type="password" [(ngModel)]="password" autocomplete="current-password" />
+    </label>
+    <button class="btn primary block" type="submit" [disabled]="loading()">
+      {{ loading() ? 'Logging in...' : 'Log in' }}
+    </button>
+    <p class="muted small center">Residents: use the reference number given by your health center.</p>
+  </form>
+</div>

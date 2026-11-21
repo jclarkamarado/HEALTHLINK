@@ -1,0 +1,197 @@
+<!-- preloader -->
+<div class="preloader">
+  <div class="pre-logo">❤ HEALTH<span>LINK</span></div>
+  <div class="pre-bar"><div class="pre-fill"></div></div>
+</div>
+
+<div class="noise"></div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="progress"></div>
+
+<!-- floating pill navbar -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" (click)="scrollTo('home')">❤ HEALTH<span>LINK</span></a>
+    <nav [class.open]="menuOpen">
+      <a (click)="scrollTo('home')">Home</a>
+      <a (click)="scrollTo('how')">How it works</a>
+      <a (click)="scrollTo('about')">About</a>
+      <a (click)="scrollTo('faq')">FAQ</a>
+    </nav>
+    <a class="btn small magnetic login" routerLink="/login">Log in</a>
+    <button class="burger" (click)="menuOpen = !menuOpen" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- hero -->
+<section id="home" class="hero">
+  <div class="grid-bg"></div>
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+  <div class="hero-content">
+    <span class="pill"><i class="live"></i> Community Health Records</span>
+    <h1>
+      <span class="mask"><span class="line">Never miss a</span></span>
+      <span class="mask"><span class="line grad">vaccine dose</span></span>
+      <span class="mask"><span class="line">again.</span></span>
+    </h1>
+    <p class="hero-sub">Track vaccinations and medicine stock in one place. Health workers stay organized, and residents can see their own records anytime.</p>
+    <div class="cta">
+      <a class="btn magnetic" routerLink="/login">Get started</a>
+      <a class="btn ghost magnetic" (click)="scrollTo('how')">See how it works</a>
+    </div>
+  </div>
+
+  <!-- product preview (sample data) -->
+  <div class="mock-wrap">
+    <div class="mock glass">
+      <div class="mock-top"><i></i><i></i><i></i><span>Dashboard · sample preview</span></div>
+      <div class="mock-body">
+        <div class="ring-box">
+          <svg viewBox="0 0 120 120">
+            <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>
+            <circle class="ring-bg" cx="60" cy="60" r="50" pathLength="100"/>
+            <circle class="ring-fg" cx="60" cy="60" r="50" pathLength="100"/>
+          </svg>
+          <div class="ring-num"><b><span class="count-ring">87</span>%</b><small>On schedule</small></div>
+        </div>
+        <div class="mock-rows">
+          <div class="mock-row"><span class="av">A</span><div><b>Resident A</b><small>Dose 2 recorded</small></div><em class="ok">Done</em></div>
+          <div class="mock-row"><span class="av">B</span><div><b>Resident B</b><small>Next dose in 3 days</small></div><em class="due">Due</em></div>
+          <div class="mock-row"><span class="av">C</span><div><b>Resident C</b><small>Missed dose</small></div><em class="over">Overdue</em></div>
+        </div>
+      </div>
+    </div>
+    <div class="float-chip c1">💉 Dose recorded</div>
+    <div class="float-chip c2">⏰ Reminder sent</div>
+  </div>
+
+  <div class="scroll-hint"><span></span></div>
+</section>
+
+<!-- marquee -->
+<div class="marquee">
+  <div class="marquee-track">
+    @for (w of marquee; track $index) { <span>{{ w }}</span><i>✦</i> }
+  </div>
+</div>
+
+<!-- stats -->
+<section class="stats">
+  @for (s of stats; track s.label) {
+    <div class="stat">
+      <div class="big"><span class="count" [attr.data-count]="s.n">0</span>{{ s.suffix }}</div>
+      <div class="lbl">{{ s.label }}</div>
+    </div>
+  }
+</section>
+
+<!-- how it works -->
+<section id="how" class="section">
+  <div class="sec-head">
+    <span class="tag">Process</span>
+    <h2>How it works</h2>
+    <p class="sub">Four simple steps from registration to follow-up.</p>
+  </div>
+  <div class="steps">
+    <div class="track"><div class="track-fill"></div></div>
+    @for (s of steps; track s.title; let i = $index) {
+      <div class="card step tilt">
+        <div class="num">{{ i + 1 }}</div>
+        <div class="icon">{{ s.icon }}</div>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.text }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- about: bento -->
+<section id="about" class="section alt">
+  <div class="sec-head about-text">
+    <span class="tag">About</span>
+    <h2>Built for community health centers</h2>
+    <p class="sub">HealthLink replaces paper logbooks with a simple, reliable web system for health workers, administrators and residents.</p>
+  </div>
+  <div class="features bento">
+    <div class="card feature tilt b-records">
+      <div class="icon">🗂️</div>
+      <h3>Vaccination records</h3>
+      <p>Complete, voidable (never deleted) history per resident.</p>
+      <div class="mini">
+        <div class="mini-row"><i class="dot ok"></i><span>Dose 1</span><em>Recorded</em></div>
+        <div class="mini-row"><i class="dot ok"></i><span>Dose 2</span><em>Recorded</em></div>
+        <div class="mini-row"><i class="dot due"></i><span>Booster</span><em>Scheduled</em></div>
+      </div>
+    </div>
+    <div class="card feature tilt b-alerts">
+      <div class="icon">🔔</div>
+      <h3>Due &amp; overdue alerts</h3>
+      <p>Daily checks keep missed doses from slipping through.</p>
+      <div class="chips"><span class="chip-pop ok">On time</span><span class="chip-pop due">Due</span><span class="chip-pop over">Overdue</span></div>
+    </div>
+    <div class="card feature tilt b-stock">
+      <div class="icon">💊</div>
+      <h3>Medicine stock</h3>
+      <p>Track availability, low stock and expiry.</p>
+      <div class="bars"><i class="bar" style="--h:45%"></i><i class="bar" style="--h:80%"></i><i class="bar" style="--h:60%"></i><i class="bar" style="--h:25%"></i><i class="bar" style="--h:90%"></i></div>
+    </div>
+    <div class="card feature tilt b-roles">
+      <div class="icon">🔒</div>
+      <h3>Role-based access</h3>
+      <p>Everyone sees only what they need.</p>
+      <div class="chips"><span class="chip-pop role">Health Worker</span><span class="chip-pop role">Resident</span><span class="chip-pop role">Administrator</span></div>
+    </div>
+    <div class="card feature tilt b-print">
+      <div class="icon">🖨️</div>
+      <h3>Print-ready follow-up lists</h3>
+      <p>Export who needs a visit this week as a simple printed list or PDF.</p>
+    </div>
+  </div>
+</section>
+
+<!-- faq -->
+<section id="faq" class="section faq">
+  <div class="sec-head">
+    <span class="tag">FAQ</span>
+    <h2>Good to know</h2>
+  </div>
+  <div class="faq-list">
+    @for (f of faqs; track f.q; let i = $index) {
+      <div class="faq-item" [class.open]="openFaq === i" (click)="openFaq = openFaq === i ? -1 : i">
+        <div class="faq-q"><span>{{ f.q }}</span><i>+</i></div>
+        <div class="faq-a"><div><p>{{ f.a }}</p></div></div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA band -->
+<section class="band">
+  <h2>Ready to keep every record on track?</h2>
+  <a class="btn magnetic" routerLink="/login">Log in to HealthLink</a>
+</section>
+
+<!-- footer -->
+<footer class="footer">
+  <div class="foot-grid">
+    <div>
+      <a class="brand" (click)="scrollTo('home')">❤ HEALTH<span>LINK</span></a>
+      <p>Community health records and vaccination tracking.</p>
+    </div>
+    <div>
+      <h4>Links</h4>
+      <a (click)="scrollTo('how')">How it works</a>
+      <a (click)="scrollTo('about')">About</a>
+      <a (click)="scrollTo('faq')">FAQ</a>
+      <a routerLink="/login">Log in</a>
+    </div>
+    <div>
+      <h4>Project</h4>
+      <p>CC106 Application Development<br>Aces Tagum College</p>
+    </div>
+  </div>
+  <div class="foot-big">@for (c of 'HEALTHLINK'.split(''); track $index) { <span>{{ c }}</span> }</div>
+  <div class="copy">© {{ year }} HealthLink. All rights reserved.</div>
+</footer>
