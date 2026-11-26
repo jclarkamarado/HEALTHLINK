@@ -1,8 +1,8 @@
 // Writes src/environments/environment.prod.ts from the API_URL env var (set in Vercel).
-// Example: API_URL=https://healthlink-api.onrender.com/api
+// Example: API_URL=https://healthlink-p3i6.onrender.com/api
 import { writeFileSync } from 'node:fs';
 
-const fallback = 'https://healthlink-api.onrender.com/api';
+const fallback = 'https://healthlink-p3i6.onrender.com/api';
 let apiUrl = (process.env.API_URL || fallback).trim().replace(/\/+$/, '');
 if (!apiUrl.endsWith('/api')) apiUrl += '/api';
 
