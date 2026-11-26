@@ -16,15 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         $today = Carbon::today();
 
-        // ---- Accounts (CHANGE THESE PASSWORDS before any real use) ----
-        $admin = User::create([
-            'first_name' => 'System', 'last_name' => 'Administrator', 'username' => 'admin',
-            'role' => User::ROLE_ADMIN, 'password' => 'Admin@12345',
-        ]);
-        $worker = User::create([
-            'first_name' => 'Rosa', 'last_name' => 'Mendoza', 'username' => 'worker1',
-            'role' => User::ROLE_WORKER, 'password' => 'Worker@12345',
-        ]);
+        // ---- Accounts: one per role (admin, health worker, resident) ----
+        $this->call(RoleUserSeeder::class);
+        $worker = User::where('username', 'worker1')->firstOrFail();
 
         // ---- Vaccines: PLACEHOLDER schedule values for demo only.
         // Replace with the official schedule from your health center / DOH EPI.
@@ -57,7 +51,7 @@ class DatabaseSeeder extends Seeder
             ]);
         };
 
-        $maria = $make('Maria', 'Santos', 150, 'female', 'Purok 1');
+        $maria = Resident::where('user_id', User::where('role', User::ROLE_RESIDENT)->value('id'))->firstOrFail();
         $give($maria, 'BCG', 148);
         $give($maria, 'Pentavalent', 60);      // next dose long overdue
 
@@ -74,13 +68,6 @@ class DatabaseSeeder extends Seeder
 
         $make('Liza', 'Ramos', 700, 'female', 'Purok 2');
 
-        // Resident with a portal login: username = reference number
-        $portalUser = User::create([
-            'first_name' => $maria->first_name, 'last_name' => $maria->last_name,
-            'username' => $maria->reference_no, 'role' => User::ROLE_RESIDENT, 'password' => 'Resident@123',
-        ]);
-        $maria->update(['user_id' => $portalUser->id]);
-
         // ---- Medicines ----
         foreach ([
             ['Paracetamol', 'Paracetamol', '500 mg tablet', 200, 'tablets', 50, 'PCM-001', 400],
@@ -96,6 +83,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $this->command?->info('Seeded. Portal login for demo resident: '.$maria->reference_no.' / Resident@123');
+        $this->command?->info('Seeded. Resident portal login: '.$maria->reference_no.' / Resident@123');
     }
 }
